@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "emacs": "lisp",
+        "stdlib.h": "c",
+        "cstdlib": "c"
+    }
+}

@@ -1,0 +1,6 @@
+[submodule "3rd_party/unity"]
+	path = 3rd_party/unity
+	url = https://github.com/ThrowTheSwitch/Unity.git
+[submodule "3rd_party/clogger"]
+	path = 3rd_party/clogger
+	url = https://gitlab.com/roguesensei/clogger
