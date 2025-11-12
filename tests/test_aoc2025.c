@@ -1,33 +1,27 @@
+/**
+ * @file test_aoc2025.c
+ * @brief Unit tests for Advent of Code 2025 solutions.
+ * This file contains unit tests for the solutions implemented
+ * for Advent of Code 2025, specifically for Day 01 and Day 02 parts 1 and 2.
+ * @author R. Middel
+ * @date 2024-06-10
+ * @version 1.0
+ * @copyright Copyright (c) 2025 R. Middel
+ */
+
+#include<aoc.h>
 #include <unity.h>
-#include <aoc.h>
 
-void test_day02_part1(void)
-{
-    TEST_ASSERT_NOT_EQUAL_INT32(0, day02_part1());
-}
-void test_day02_part2(void)
-{
-    TEST_ASSERT_EQUAL_INT32(0, day02_part2());
-}
 
-void test_day01_part1(void)
-{
-    TEST_ASSERT_NOT_EQUAL_INT32(0, day01_part1());
-}
-void test_day01_part2(void)
-{
-    TEST_ASSERT_EQUAL_INT32(0, day01_part2());
-}
+void test_day02_part1(void) { TEST_ASSERT_NOT_EQUAL_INT32(0, day02_part1()); }
+void test_day02_part2(void) { TEST_ASSERT_EQUAL_INT32(0, day02_part2()); }
 
-void setUp(void)
-{
-    /* Nothing to do – placeholder for Unity */
-}
+void test_day01_part1(void) { TEST_ASSERT_NOT_EQUAL_INT32(0, day01_part1()); }
+void test_day01_part2(void) { TEST_ASSERT_EQUAL_INT32(0, day01_part2()); }
 
-void tearDown(void)
-{
-    /* Nothing to do – placeholder for Unity */
-}
+void setUp(void) { /* Nothing to do – placeholder for Unity */ }
+
+void tearDown(void) { /* Nothing to do – placeholder for Unity */ }
 
 int main(void)
 {

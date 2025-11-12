@@ -2,6 +2,9 @@
     "files.associations": {
         "emacs": "lisp",
         "stdlib.h": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "clogger.h": "c",
+        "aoc.h": "c",
+        "random": "c"
     }
 }

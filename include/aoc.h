@@ -1,12 +1,42 @@
+/*=====================================================================
+ * @file   aoc.h
+ * @brief  Header file for Advent of Code 2025 solutions.
+ * @details 
+ * This module contains function prototypes for the solutions
+ * to the Advent of Code 2025 challenges, including Day 01 and Day 02
+ * Parts 1 and 2.
+ *
+ * @author R. Middel
+ * @date   2025-11-12
+ *
+ * @license
+ *      SPDX‑License-Identifier: MIT
+ *
+ * @notes
+ *   • clogger.h: For logging functionality.
+ *   • Standard C Library: For input/output and standard utilities.
+ *=====================================================================*/
 #ifndef __AOC_AOC_H__
 #define __AOC_AOC_H__
 
+#include <clogger.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+/* Exported function prototypes --------------------------------------- */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 int32_t day01_part1(void);
 int32_t day01_part2(void);
 
-uint32_t day02_part1(void);
-uint32_t day02_part2(void);
+int32_t day02_part1(void);
+int32_t day02_part2(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // __AOC_AOC_H__
