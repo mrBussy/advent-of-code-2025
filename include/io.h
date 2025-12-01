@@ -22,6 +22,11 @@
 
 #include <io.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_LINE_LEN 1024
+#define INITIAL_CAPACITY 8
 
 #if defined(_WIN32) || defined(_WIN64)
 /* Windows */
@@ -50,9 +55,11 @@ char* io_strcat(char* dest, const char* src);
  * This function opens the file, reads its contents, and processes
  * the input data as required by the application.
  * @param filename The path to the input file.
+ * @param lines Pointer to an array of strings to store the read lines.
+ * @param line_count Pointer to a size_t variable to store the number of lines read.
  * @return uint32_t EXIT_SUCCESS on success, or EXIT_FAILURE on error.
  */
-uint32_t io_read_input(const char* filename);
+uint32_t io_read_input(const char* filename, char*** out_lines, size_t* out_line_count);
 
 #ifdef __cplusplus
 }

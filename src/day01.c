@@ -18,6 +18,8 @@
  *     - CLogger: For logging functionality.
  *     - Standard C Library: For input/output and standard utilities.
  *=====================================================================*/
+#include <string.h>
+
 #include "aoc.h"
 #include "io.h"
 
@@ -30,12 +32,42 @@
 int32_t day01_part1(void) {
     // Implementation for Day 01 Part 1
     clog_info(__FILE__, "Entering day01_part1 function");
+    char **lines = NULL;
+    size_t line_count = 0;
 
-    if(EXIT_FAILURE == io_read_input("day01.txt")) {
+    if(EXIT_FAILURE == io_read_input("day01.txt", &lines, &line_count)) {
         return -EXIT_FAILURE;
     }
 
-    return 1;
+    int32_t dail = 50;
+    size_t index = 0;
+    size_t password = 0;
+    
+    while(index < line_count) {
+        clog_info(__FILE__, "Read line: %s", lines[index]);
+
+        if (strncmp(lines[index], "L", 1) == 0)
+        {
+            dail -= atoi(&lines[index][1]);
+            if(dail < 0 ) {
+                dail += 100;
+            }
+        }
+        else {
+            dail += atoi(&lines[index][1]);
+        }
+
+        dail %= 100;
+        if (dail == 0) {
+            password++;
+        }
+
+        clog_debug(__FILE__, "The dail is rotated %s to point at %d", lines[index], dail);
+        index++;
+    }
+
+    free(lines);
+    return password;
 }
 /**
  * @brief Solves Day 01 Part 2 of Advent of Code 2025.

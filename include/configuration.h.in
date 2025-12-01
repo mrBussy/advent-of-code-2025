@@ -15,7 +15,9 @@
 #ifndef __AOC_CONFIGURATION_H__
 #define __AOC_CONFIGURATION_H__
 
+#ifndef AOC_PUZZLE_INPUT_PATH
 #define AOC_PUZZLE_INPUT_PATH "@AOC_PUZZLE_INPUT_PATH@"
+#endif
 
 /* Exported function prototypes --------------------------------------- */
 #ifdef __cplusplus

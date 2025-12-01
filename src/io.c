@@ -16,6 +16,8 @@
  *     - CLogger: For logging functionality.
  *     - Standard C Library: For input/output and standard utilities.
  *=====================================================================*/
+#include <string.h>
+
 #include "io.h"
 #include "aoc.h"
 
@@ -55,20 +57,66 @@ char* io_strcat(char* dest, const char* src)
  * @param filename The path to the input file.
  * @return uint32_t EXIT_SUCCESS on success, or EXIT_FAILURE on error.
  */
-uint32_t io_read_input(const char* filename)
+uint32_t io_read_input(const char* filename, char*** out_lines, size_t* out_line_count)
 {
-    clog_info(__FILE__, "Reading input from file: %s", filename);
-
     char full_path[1024] = AOC_PUZZLE_INPUT_PATH;
     io_strcat(full_path, filename);
+    clog_info(__FILE__, "Reading input from file: %s", full_path);
 
-    FILE* filep = fopen(full_path, "r");
-    if (filep == NULL)
+    FILE* fp = fopen(full_path, "r");
+    if (!fp)
     {
         clog_critical(__FILE__, "Failed to open file: %s", full_path);
-        return EXIT_FAILURE;
+        return (uint32_t) EXIT_FAILURE;
     }
 
-    fclose(filep);
-    return EXIT_SUCCESS;
+    size_t capacity = INITIAL_CAPACITY;
+    char** lines = (char **)malloc(capacity * sizeof(char*));
+    if (!lines)
+    {
+        fclose(fp);
+        return (uint32_t) EXIT_FAILURE;
+    }
+
+    *out_line_count = 0;
+    char buf[MAX_LINE_LEN];
+
+    while (fgets(buf, sizeof buf, fp))
+    {
+        if (*out_line_count == capacity)
+        {
+            capacity *= 2;
+            char** tmp = realloc(lines, capacity * sizeof(char *));
+            if (!tmp)
+            {
+                clog_critical(__FILE__, "Error realloc");
+
+                fclose(fp);
+                return (uint32_t) EXIT_FAILURE;
+            }
+            lines = tmp;
+        }
+
+        /* strip trailing newline if you don’t want it */
+        size_t len = strlen(buf);
+        if (len && buf[len - 1] == '\n')
+            buf[len - 1] = '\0';
+
+        lines[*out_line_count] = (char *)malloc(MAX_LINE_LEN * sizeof(char));
+        strncpy(lines[*out_line_count], buf, MAX_LINE_LEN);
+        (*out_line_count)++;
+    }
+
+    if (ferror(fp))
+    {
+        clog_critical(__FILE__, "Error while reading");
+
+        perror("Error while reading");
+        fclose(fp);
+        return (uint32_t) EXIT_FAILURE;
+    }
+
+    fclose(fp);
+    *out_lines = lines;
+    return (uint32_t) EXIT_SUCCESS;
 }

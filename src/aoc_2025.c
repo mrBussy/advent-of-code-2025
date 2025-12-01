@@ -98,7 +98,7 @@ int main(int argc, const char **argv)
     }
 
     // Execute based on parsed arguments
-    if ((2 == day || 0 == day) && (part == 0 || part == 1))
+    /*if ((2 == day || 0 == day) && (part == 0 || part == 1))
     {
         printf("Day 2 - Part 1 Result: %u\n", day02_part1());
     }
@@ -106,6 +106,6 @@ int main(int argc, const char **argv)
     {
         printf("Day 2 - Part 2 Result: %u\n", day02_part2());
     }
-    
+    */
     return EXIT_SUCCESS;
 }
