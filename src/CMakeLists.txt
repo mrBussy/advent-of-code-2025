@@ -21,6 +21,7 @@ if (TESTING)
     set(AOC_LIBRARY aoc_2025_lib)
 
     add_library(${AOC_LIBRARY} STATIC
+        io.c
         ${DAY01_SOURCES}
         ${DAY02_SOURCES}
     )
