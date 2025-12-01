@@ -90,7 +90,6 @@ uint32_t io_read_input(const char* filename, char*** out_lines, size_t* out_line
             if (!tmp)
             {
                 clog_critical(__FILE__, "Error realloc");
-
                 fclose(fp);
                 return (uint32_t) EXIT_FAILURE;
             }
@@ -110,7 +109,6 @@ uint32_t io_read_input(const char* filename, char*** out_lines, size_t* out_line
     if (ferror(fp))
     {
         clog_critical(__FILE__, "Error while reading");
-
         perror("Error while reading");
         fclose(fp);
         return (uint32_t) EXIT_FAILURE;

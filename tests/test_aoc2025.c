@@ -13,7 +13,7 @@
 #include <unity.h>
 
 void test_day01_part1(void) { TEST_ASSERT_EQUAL_INT32(3, day01_part1()); }
-void test_day01_part2(void) { TEST_ASSERT_EQUAL_INT32(0, day01_part2()); }
+void test_day01_part2(void) { TEST_ASSERT_EQUAL_INT32(6, day01_part2()); }
 
 void setUp(void) { /* Nothing to do – placeholder for Unity */ }
 

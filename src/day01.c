@@ -42,16 +42,11 @@ int32_t day01_part1(void) {
     int32_t dail = 50;
     size_t index = 0;
     size_t password = 0;
-    
-    while(index < line_count) {
-        clog_info(__FILE__, "Read line: %s", lines[index]);
 
+    while(index < line_count) {
         if (strncmp(lines[index], "L", 1) == 0)
         {
-            dail -= atoi(&lines[index][1]);
-            if(dail < 0 ) {
-                dail += 100;
-            }
+            dail = dail - atoi(&lines[index][1]) + 100;
         }
         else {
             dail += atoi(&lines[index][1]);
