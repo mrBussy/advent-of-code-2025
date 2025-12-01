@@ -79,3 +79,7 @@ unity_config.h
 
 # Custom
 build/
+
+# Ignore puzzle files
+input/*.txt
+tests/inputs/*.txt
