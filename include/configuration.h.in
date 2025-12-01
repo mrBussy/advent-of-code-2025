@@ -1,0 +1,29 @@
+/*=====================================================================
+ * @file   configuration.h
+ * @brief  Headerfile with configuration settings for Advent of Code 2025.
+ * @details 
+ *
+ * @author R. Middel
+ * @date   2025-11-12
+ *
+ * @license
+ *      SPDX‑License-Identifier: MIT
+ *
+ * @notes
+ *   • Project-wide configuration settings.
+ *=====================================================================*/
+#ifndef __AOC_CONFIGURATION_H__
+#define __AOC_CONFIGURATION_H__
+
+#define AOC_PUZZLE_INPUT_PATH "@AOC_PUZZLE_INPUT_PATH@"
+
+/* Exported function prototypes --------------------------------------- */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // __AOC_CONFIGURATION_H__

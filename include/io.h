@@ -20,14 +20,39 @@
 #ifndef __AOC_IO_H__
 #define __AOC_IO_H__
 
+#include <io.h>
 #include <stdint.h>
+
+#if defined(_WIN32) || defined(_WIN64)
+/* Windows */
+#define PATH_SEPARATOR '\\'
+#else
+/* Anything POSIX‑like */
+#define PATH_SEPARATOR '/'
+#endif
 
 /* Exported function prototypes --------------------------------------- */
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-uint32_t io_read_input(const char *filename);
+/**
+ * @brief Concatenates two strings with a '/' separator.
+ * This function appends the source string to the destination string,
+ * adding a '/' between them if necessary.
+ * @param dest The destination string.
+ * @param src The source string to append.
+ * @return char* Pointer to the concatenated string.
+ */
+char* io_strcat(char* dest, const char* src);
+/**
+ * @brief Reads input data from a specified file.
+ * This function opens the file, reads its contents, and processes
+ * the input data as required by the application.
+ * @param filename The path to the input file.
+ * @return uint32_t EXIT_SUCCESS on success, or EXIT_FAILURE on error.
+ */
+uint32_t io_read_input(const char* filename);
 
 #ifdef __cplusplus
 }

@@ -2,20 +2,21 @@
 set(FULL_RUN_BINARY aoc_2025)
 set(FULL_RUN_BINARY_SOURCES
     aoc_2025.c
+    io.c
 )
-
-add_day(1)
-add_day(2)
 
 # ----- Build targets -----
 add_executable(${FULL_RUN_BINARY}
     ${FULL_RUN_BINARY_SOURCES}
-    ${DAY01_SOURCES}
-    ${DAY02_SOURCES}
 )
+
+# --------- Add sources & add a specific .sh file ---------
+aoc_add_puzzle(${FULL_RUN_BINARY} 1)
+aoc_add_puzzle(${FULL_RUN_BINARY} 2)
 
 target_link_libraries(${FULL_RUN_BINARY} PRIVATE clogger)
 
+# --------- Enable testing ---------
 if (TESTING)
     set(AOC_LIBRARY aoc_2025_lib)
 

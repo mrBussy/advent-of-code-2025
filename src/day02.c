@@ -25,14 +25,14 @@
  * @brief Solves Day 02 Part 1 of Advent of Code 2025.
  * This function reads the input data and processes it to produce
  * the result for Part 1 of Day 02.
- * @return int32_t The result of Part 1, or -EXIT_FAILURE on error.
+ * @return int32_23t The result of Part 1, or -EXIT_FAILURE on error.
  */
 int32_t day02_part1(void)
 {
     // Implementation for Day 02 Part 1
     clog_info(__FILE__, "Entering day02_part1 function");
 
-    if (EXIT_FAILURE == io_read_input("input/day02.txt"))
+    if (EXIT_FAILURE == io_read_input("day02.txt"))
     {
         return -EXIT_FAILURE;
     }
@@ -52,37 +52,3 @@ int32_t day02_part2(void)
 
     return 0;
 }
-
-#ifdef RUN_STANDALONE
-/**
- * @brief Standalone main function for testing Day 02 solutions.
- * This function allows for independent execution of Day 02 parts.
- * @return int Exit status of the program.
- */
-int main(void)
-{
-    clog_info(__FILE__, "Entering day02 standalone main function");
-
-    printf("Advent of Code 2025 - Day 1\n");
-
-    int32_t result = day02_part1();
-    if (result == -EXIT_FAILURE)
-    {
-        clog_error(__FILE__, "day02_part1 encountered an error reading input");
-        return EXIT_FAILURE;
-    }
-    printf("Part 1 Result: %u\n", result);
-
-    result = day02_part2();
-    if (result == -EXIT_FAILURE)
-    {
-        clog_error(__FILE__, "day02_part1 encountered an error reading input");
-        return EXIT_FAILURE;
-    }
-    printf("Part 2 Result: %u\n", result);
-
-    clog_info(__FILE__, "Leaving day02 standalone main function");
-
-    return EXIT_SUCCESS;
-}
-#endif

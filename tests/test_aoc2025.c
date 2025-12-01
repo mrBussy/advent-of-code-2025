@@ -16,7 +16,7 @@
 void test_day02_part1(void) { TEST_ASSERT_NOT_EQUAL_INT32(0, day02_part1()); }
 void test_day02_part2(void) { TEST_ASSERT_EQUAL_INT32(0, day02_part2()); }
 
-void test_day01_part1(void) { TEST_ASSERT_NOT_EQUAL_INT32(0, day01_part1()); }
+void test_day01_part1(void) { TEST_ASSERT_NOT_EQUAL_INT32(3, day01_part1()); }
 void test_day01_part2(void) { TEST_ASSERT_EQUAL_INT32(0, day01_part2()); }
 
 void setUp(void) { /* Nothing to do – placeholder for Unity */ }

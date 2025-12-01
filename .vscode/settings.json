@@ -5,6 +5,13 @@
         "cstdlib": "c",
         "clogger.h": "c",
         "aoc.h": "c",
-        "random": "c"
+        "random": "c",
+        "*.in": "cpp",
+        "io.h": "c",
+        "stdint.h": "c",
+        "clog.h": "c",
+        "clog_assert.h": "c",
+        "console.h": "c",
+        "core.h": "c"
     }
 }

@@ -5,7 +5,8 @@ project(advent-of-code-2025
     LANGUAGES C)
 
 # ----- Options -----
-set(TESTING OFF CACHE BOOL "Enable testing")
+set(AOC_PUZZLE_INPUT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/input/" CACHE PATH "Path to the puzzle input files")
+set(TESTING ON CACHE BOOL "Enable testing")
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
@@ -22,8 +23,11 @@ else()
 endif()
 
 # ----- Global inclusions -----
-include_directories(${PROJECT_SOURCE_DIR}/include)
-include(${PROJECT_SOURCE_DIR}/cmake/add_day.cmake)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/configuration.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/configuration.h @ONLY)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
+include(aoc)
 
 # Add clogger as a subdirectory
 add_subdirectory("3rd_party/clogger")

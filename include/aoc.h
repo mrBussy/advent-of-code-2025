@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "configuration.h"
+
 /* Exported function prototypes --------------------------------------- */
 #ifdef __cplusplus
 extern "C" {

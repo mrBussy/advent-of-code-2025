@@ -1,5 +1,36 @@
+# ------------------------------------------------------------
+# Function: make_day_script(<day_padded>)
+#
+# Example:
+#   make_day_script(1)   # → creates day1.sh
+#   make_day_script(6)   # → creates day6.sh
+#
+# ------------------------------------------------------------
+function(make_day_script day_padded)
+    # Guard against non‑numeric input
+    if(NOT day_padded MATCHES "^[0-9]+$")
+        message(FATAL_ERROR "make_day_script: argument must be a non‑negative integer")
+    endif()
 
-function(add_day day_number)
+    # Build the filename (relative to the binary dir)
+    set(script_name "day${day_padded}.sh")
+    set(script_path "${CMAKE_BINARY_DIR}/${script_name}")
+
+    # ------------------------------------------------------------------
+    # Write the script contents.
+    # Feel free to replace the echo line with whatever you need.
+    # ------------------------------------------------------------------
+    configure_file(${CMAKE_SOURCE_DIR}/include/script.sh.in ${script_path} @ONLY)
+
+    # Make the file executable (POSIX only – on Windows it’s a no‑op)
+    if(UNIX)
+        file(CHMOD "${script_path}" PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+    endif()
+
+    message(STATUS "Created script: ${script_path}")
+endfunction()
+
+function(aoc_add_puzzle TARGET_BINARY day_number)
     # -----------------------------------------------------------------
     # 1️⃣ Pad the day number to two digits (01, 02 … 09, 10, 11 …)
     # -----------------------------------------------------------------
@@ -27,15 +58,14 @@ function(add_day day_number)
     # -----------------------------------------------------------------
     set(src_var "DAY${day_padded}_SOURCES")   # e.g. DAY1_SOURCES
     set(${src_var} "day${day_padded}.c"
-        io.c
-    )     # the actual source file
+    )
 
     # -----------------------------------------------------------------
-    # 4️⃣ Create the executable using the padded name
+    # 4️⃣ Create a script to start running the correct day
     # -----------------------------------------------------------------
-    add_executable(${binary_name} ${${src_var}})
-    target_compile_definitions(${binary_name} PRIVATE RUN_STANDALONE)
-    target_link_libraries(${binary_name} PRIVATE clogger)
+
+    make_day_script(${day_padded})
+    target_sources(${TARGET_BINARY} PRIVATE ${${src_var}})
 
     # -----------------------------------------------------------------
     # 5️⃣ Expose the source list to the caller (if you need it)
