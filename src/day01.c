@@ -74,6 +74,70 @@ int32_t day01_part2(void)
 {
     // Implementation for Day 01 Part 2
     clog_info(__FILE__, "Entering day01_part2 function");
+    char** lines = NULL;
+    size_t line_count = 0;
 
-    return 0;
+    if (EXIT_FAILURE == io_read_input("day01.txt", &lines, &line_count))
+    {
+        return -EXIT_FAILURE;
+    }
+
+    int32_t dail = 50;
+    size_t index = 0;
+    size_t password = 0;
+    int32_t rotate=0;
+    size_t overflow = 0;
+
+    while (index < line_count)
+    {
+        rotate = atoi(&lines[index][1]);
+
+        if(rotate > 100) {
+            overflow = (rotate / 100);
+            rotate = rotate % 100;
+        }
+
+        if(strncmp(lines[index], "L", 1) == 0)
+        {
+            if(dail ==0 ) {
+                dail = 100 - rotate;
+            }
+            else {
+                dail = dail - rotate;
+                if(dail < 0) {
+                    dail += 100;
+                    overflow += 1;
+                }
+                else if (dail == 0) {
+                    overflow +=1;
+                }
+            }
+        }
+        else {
+            dail += rotate;
+            if (dail == 0)
+            {
+                password += 1;
+            }
+            if (dail >= 100)
+            {
+                dail %= 100;
+                overflow += 1;
+            }
+        }
+
+        password += overflow;
+        if (overflow > 0)
+        {
+            clog_debug(__FILE__, "The dail is rotated %s to point at %d; during the rotation, it points to 0 %d times; password: %d", lines[index], dail, overflow, password);
+        }
+        else
+            clog_debug(__FILE__, "The dail is rotated %s to point at %d; password: %d", lines[index], dail, password);
+
+        overflow = 0;
+        index++;
+    }
+
+    free(lines);
+    return password;
 }
