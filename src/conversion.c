@@ -60,3 +60,12 @@ int split_string(const char* src, char delim, char** left, char** right)
 
     return EXIT_SUCCESS;
 }
+
+char* aoc_strdup(const char* s)
+{
+    size_t len = strlen(s) + 1; /* include terminating NUL */
+    char* p = malloc(len);
+    if (p)
+        memcpy(p, s, len);
+    return p;
+}

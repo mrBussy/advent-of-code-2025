@@ -29,35 +29,25 @@ extern "C" {
 #endif
 
 /**
- * @brief
- * Convert a long value to a string
+ * @brief Convert a long value to a string
+ * Convert the given long value into a string 
  * 
- * @param value 
- *      Long value to convert
- * @param buffer 
- *      The buffer to store the value (cannot be NULL)
- * @param buffersize 
- *      The length of the buffer
- * 
+ * @param value Long value to convert
+ * @param buffer The buffer to store the value (cannot be NULL)
+ * @param buffersize The length of the buffer
  */
 void long_to_str(long value, char* buffer, size_t buffersize);
 /**
- * @brief 
+ * @brief Convert a string into seporate values
  * Convert a string into seporate values
- * 
- * @param src   
- *      String to split
- * @param delim
- *      Delimiter to use
- * @param left
- *      Pointer to the left side
- * @param right
- *      Pointer to the right side
- * 
- * @return
- *  EXIT_SUCCESS if success; Else 2
+ * @param src   String to split
+ * @param delim Delimiter to use
+ * @param left  Pointer to the left side
+ * @param right Pointer to the right side
+ * @return EXIT_SUCCESS if success; Else 2
  */
 int split_string(const char* src, char delim, char** left, char** right);
+char* aoc_strdup(const char* s);
 
 #ifdef __cplusplus
 }
