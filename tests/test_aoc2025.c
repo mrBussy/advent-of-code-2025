@@ -15,6 +15,9 @@
 void test_day01_part1(void) { TEST_ASSERT_EQUAL_INT32(3, day01_part1()); }
 void test_day01_part2(void) { TEST_ASSERT_EQUAL_INT32(6, day01_part2()); }
 
+void test_day02_part1(void) { TEST_ASSERT_EQUAL_INT64(1227775554, day02_part1()); }
+void test_day02_part2(void) { TEST_ASSERT_EQUAL_INT64(4174379265, day02_part2()); }
+
 void setUp(void) { /* Nothing to do – placeholder for Unity */ }
 
 void tearDown(void) { /* Nothing to do – placeholder for Unity */ }
@@ -25,5 +28,7 @@ int main(void)
     RUN_TEST(test_day01_part1);
     RUN_TEST(test_day01_part2);
 
+    RUN_TEST(test_day02_part1);
+    RUN_TEST(test_day02_part2);
     return UNITY_END();
 }

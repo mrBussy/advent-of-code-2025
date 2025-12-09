@@ -12,6 +12,9 @@
         "clog.h": "c",
         "clog_assert.h": "c",
         "console.h": "c",
-        "core.h": "c"
+        "core.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c"
     }
 }
