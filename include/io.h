@@ -60,6 +60,15 @@ char* io_strcat(char* dest, const char* src);
  * @return uint32_t EXIT_SUCCESS on success, or EXIT_FAILURE on error.
  */
 uint32_t io_read_input(const char* filename, char*** out_lines, size_t* out_line_count);
+/**
+ * @brief Reads input data from a specified file.
+ * This function opens the file, reads its contents, and processes
+ * the input data as required by the application.
+ * @param filename The path to the input file.
+ * @param grid     A reference to the grid to fill
+ * @return uint32_t EXIT_SUCCESS on success, or EXIT_FAILURE on error.
+ */
+uint32_t io_read_grid(const char* filename, grid_t* grid);
 
 #ifdef __cplusplus
 }

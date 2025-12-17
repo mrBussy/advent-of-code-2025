@@ -18,8 +18,8 @@
  *=====================================================================*/
 #include <string.h>
 
-#include "io.h"
 #include "aoc.h"
+#include "io.h"
 
 /**
  * @brief Concatenates two strings with a '/' separator.
@@ -118,3 +118,44 @@ uint32_t io_read_input(const char* filename, char*** out_lines, size_t* out_line
     *out_lines = lines;
     return (uint32_t) EXIT_SUCCESS;
 }
+
+
+/**
+ * @brief Reads input data from a specified file.
+ * This function opens the file, reads its contents, and processes
+ * the input data as required by the application.
+ * @param filename The path to the input file.
+ * @param grid     A reference to the grid to fill
+ * @return uint32_t EXIT_SUCCESS on success, or EXIT_FAILURE on error.
+ */
+uint32_t io_read_grid(const char* filename, grid_t* grid) {
+
+    char** lines = NULL;
+    size_t line_count = 0;
+
+    if (EXIT_FAILURE == io_read_input(filename, &lines, &line_count))
+    {
+        return -EXIT_FAILURE;
+    }
+
+    grid->columns = strlen(lines[0]);
+    grid->rows = line_count;
+    grid->cells = malloc(line_count * sizeof(char) * grid->columns);
+
+    if (!grid->cells)
+    {
+        perror("malloc");
+        return EXIT_FAILURE;
+    }
+    /* Copy rows into the contiguous buffer (row‑major order) */
+    for (size_t r = 0; r < line_count; ++r)
+    {
+        memcpy(grid->cells + r * grid->columns, lines[r], grid->columns);
+    }
+
+    /* Clean up the temporary per‑line storage */
+    for (size_t index = 0; index < line_count; index++) free(lines[index]);
+    free(lines);
+
+    return (uint32_t) EXIT_SUCCESS;
+ }
