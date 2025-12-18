@@ -19,6 +19,27 @@
 
 #include "sort.h"
 
+uint64_t* quick_sort_uint64(uint64_t* array, size_t len)
+{
+    if (len < 2)
+    {
+        return array;
+    }
+    for (size_t i = 0; i < len - 1; i++)
+    {
+        for (size_t j = 0; j < len - i - 1; j++)
+        {
+            if (array[j] > array[j + 1])
+            {
+                uint64_t temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+    return array;
+}
+
 char* quick_sort(char* array)
 {
     size_t len = strlen(array);

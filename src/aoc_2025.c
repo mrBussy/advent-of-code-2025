@@ -127,5 +127,14 @@ int main(int argc, const char **argv)
         printf("Day 4 - Part 2 Result: %d\n", day04_part2());
     }
 
+    // Execute based on parsed arguments
+    if ((5 == day || 0 == day) && (part == 0 || part == 1))
+    {
+        printf("Day 5 - Part 1 Result: %d\n", day05_part1());
+    }
+    if ((5 == day || 0 == day) && (part == 0 || part == 2))
+    {
+        printf("Day 5 - Part 2 Result: %d\n", day05_part2());
+    }
     return EXIT_SUCCESS;
 }

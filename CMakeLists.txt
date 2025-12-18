@@ -17,8 +17,9 @@ set(CMAKE_C_EXTENSIONS OFF)
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "Debug mode enabled")
     add_compile_definitions(DEBUG)
-    add_compile_options(-g -Wall -Wextra -Wpedantic -O0)
-else()
+    add_compile_options(-g -Wall -Wextra -Wpedantic -O0 )
+
+    else()
     add_compile_options(-O3)
 endif()
 

@@ -17,11 +17,22 @@
 #ifndef __AOC_SORT_H__
 #define __AOC_SORT_H__
 
+#include <stdint.h>
+
 /* Exported function prototypes --------------------------------------- */
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+/**
+ * @brief Sort a uint64_t array using quick sort algorithm
+ * Sort the given uint64_t array in place using the quick sort algorithm
+ * 
+ * @param array uint64_t array to sort
+ * @param len   length of the array
+ * @return uint64_t* Pointer to the sorted character array
+ */
+uint64_t* quick_sort_uint64(uint64_t* array, size_t len);
 /**
  * @brief Sort a character array using quick sort algorithm
  * Sort the given character array in place using the quick sort algorithm
