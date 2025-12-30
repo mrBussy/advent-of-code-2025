@@ -18,6 +18,7 @@ aoc_add_puzzle(${FULL_RUN_BINARY} 2)
 aoc_add_puzzle(${FULL_RUN_BINARY} 3)
 aoc_add_puzzle(${FULL_RUN_BINARY} 4)
 aoc_add_puzzle(${FULL_RUN_BINARY} 5)
+aoc_add_puzzle(${FULL_RUN_BINARY} 6)
 
 target_link_libraries(${FULL_RUN_BINARY} PRIVATE clogger)
 
@@ -34,6 +35,7 @@ if (TESTING)
         ${DAY03_SOURCES}
         ${DAY04_SOURCES}  
         ${DAY05_SOURCES}
+        ${DAY06_SOURCES}
     )
 
     set(AOC_PUZZLE_INPUT_PATH "${CMAKE_SOURCE_DIR}/tests/inputs")
@@ -41,5 +43,6 @@ if (TESTING)
     message(STATUS "Setting AOC_PUZZLE_INPUT_PATH to ${AOC_PUZZLE_INPUT_PATH}")
 
     target_compile_definitions(${AOC_LIBRARY} PRIVATE AOC_PUZZLE_INPUT_PATH="${AOC_PUZZLE_INPUT_PATH}")
+    target_compile_definitions(${AOC_LIBRARY} PRIVATE TESTING=1)
 
 endif()

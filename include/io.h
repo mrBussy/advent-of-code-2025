@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_LINE_LEN 1024
+#define MAX_LINE_LEN 1024 * 4
 #define INITIAL_CAPACITY 8
 
 #if defined(_WIN32) || defined(_WIN64)
