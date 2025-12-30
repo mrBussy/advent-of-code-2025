@@ -26,6 +26,11 @@
 #include "io.h"
 #include "sort.h"
 
+typedef struct range {
+    uint64_t start;
+    uint64_t end_including;
+} range_t;
+
 /**
  * @brief Solves Day 05 Part 1 of Advent of Code 2025.
  * This function reads the input data and processes it to produce
@@ -44,10 +49,7 @@ uint32_t day05_part1(void)
     }
 
     size_t line_index = 0;
-    struct range {
-        uint64_t start;
-        uint64_t end_including;
-    };
+
 
     struct range* fresh_ingredients_ids = malloc(sizeof(struct range));
     size_t range_capacity=1;
@@ -90,7 +92,14 @@ uint32_t day05_part1(void)
     return available_ingredient_ids;
 }
 
-static unsigned char fresh_ingredients[10000] = {0};
+int range_compare(const void *left, const void *right) {
+    const range_t *left_range = (const range_t *)left;
+    const range_t *right_range = (const range_t *)right;
+    
+    if (left_range->start < right_range->start) return -1;
+    if (left_range->start > right_range->start) return 1;
+    return 0;
+}
 
 /**
  * @brief Solves Day 05 Part 2 of Advent of Code 2025.
@@ -98,8 +107,7 @@ static unsigned char fresh_ingredients[10000] = {0};
  * the result for Part 2 of Day 05.
  * @return uint32_t The result of Part 2, or EXIT_FAILURE on error.
  */
-uint32_t
-        day05_part2(void)
+uint64_t day05_part2(void)
 {
 
     clog_info(__FILE__, "Entering day05_part2 function");
@@ -111,30 +119,53 @@ uint32_t
         return -EXIT_FAILURE;
     }
 
-    size_t line_index = 0;
-    uint64_t max_value=0;
-    while (strlen(lines[line_index]) > 0)
+    size_t range_size = 0;
+    range_t ranges[line_count];
+
+    while (range_size < line_count && '\n' != lines[range_size][0] && '\0' != lines[range_size][0])
     {
         uint64_t start, end;
-        sscanf(lines[line_index], "%lu-%lu", &start, &end);
-
-        for (uint64_t entry = start; entry <= end; entry++) {
-            clog_debug(__FILE__, "%lu word %lu", entry, entry / 100000000000);
-            //fresh_ingredients[entry % 706001751286] =
-            //        1;
-        }
-        if(end > max_value) max_value = end;
-
-        line_index++;
+        sscanf(lines[range_size], "%lu-%lu", &start, &end);
+        ranges[range_size].start = start;
+        ranges[range_size].end_including = end;
+        range_size++;
     }
 
-    uint32_t sum=0;
-    for (uint64_t id = 0; id <= max_value; ++id)
+    qsort(ranges, range_size, sizeof(range_t), range_compare);
+
+    size_t combined_range_size=0;
+    range_t combined_ranges[range_size+1];
+    memset(combined_ranges, 0, sizeof combined_ranges);
+
+    combined_ranges[0].start = ranges[0].start;
+    combined_ranges[0].end_including = ranges[0].end_including;
+
+    for (size_t index = 0; index < range_size; index++)
     {
-        sum += fresh_ingredients[id];
+        // Check to see if the start > combined start and start < end_including
+        if ((ranges[index].start <= combined_ranges[combined_range_size].end_including) &&
+            (ranges[index].end_including > combined_ranges[combined_range_size].end_including))
+        {
+            combined_ranges[combined_range_size].end_including = ranges[index].end_including;
+        }
+
+        if (ranges[index].start > combined_ranges[combined_range_size].end_including)
+        {
+            combined_range_size++;
+            combined_ranges[combined_range_size].start = ranges[index].start;
+            combined_ranges[combined_range_size].end_including = ranges[index].end_including;
+        }
+    };
+
+    __uint128_t sum=0;
+    for (size_t index = 0; index <= combined_range_size; index++) {
+        if (combined_ranges[index].end_including > 0 && combined_ranges[index].start > 0)
+            sum += (combined_ranges[index].end_including - combined_ranges[index].start) + 1;
     }
 
     free(lines);
 
+    // 324041339014962 <-- to low
+    // next try: 332067203034711
     return sum;
 }

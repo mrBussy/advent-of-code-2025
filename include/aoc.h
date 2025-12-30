@@ -55,7 +55,7 @@ uint32_t day04_part1(void);
 uint32_t day04_part2(void);
 
 uint32_t day05_part1(void);
-uint32_t day05_part2(void);
+uint64_t day05_part2(void);
 
 #ifdef __cplusplus
 }
