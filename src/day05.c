@@ -165,7 +165,5 @@ uint64_t day05_part2(void)
 
     free(lines);
 
-    // 324041339014962 <-- to low
-    // next try: 332067203034711
     return sum;
 }
