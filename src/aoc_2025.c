@@ -144,7 +144,7 @@ int main(int argc, const char **argv)
     }
     if ((6 == day || 0 == day) && (part == 0 || part == 2))
     {
-        printf("Day 6 - Part 2 Result: %d\n", day06_part2());
+        printf("Day 6 - Part 2 Result: %lu\n", day06_part2());
     }
     return EXIT_SUCCESS;
 }
