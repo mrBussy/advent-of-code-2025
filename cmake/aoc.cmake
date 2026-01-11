@@ -30,7 +30,7 @@ function(make_day_script day_padded)
     message(STATUS "Created script: ${script_path}")
 endfunction()
 
-function(aoc_add_puzzle TARGET_BINARY day_number)
+function(aoc_add_puzzle TARGET_BINARY day_number AOC_LIBRARY)
     # -----------------------------------------------------------------
     # 1️⃣ Pad the day number to two digits (01, 02 … 09, 10, 11 …)
     # -----------------------------------------------------------------
@@ -66,6 +66,7 @@ function(aoc_add_puzzle TARGET_BINARY day_number)
 
     make_day_script(${day_padded})
     target_sources(${TARGET_BINARY} PRIVATE ${${src_var}})
+    target_sources(${AOC_LIBRARY} PRIVATE ${${src_var}})
 
     # -----------------------------------------------------------------
     # 5️⃣ Expose the source list to the caller (if you need it)
