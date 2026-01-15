@@ -31,7 +31,7 @@ void test_day06_part1(void) { TEST_ASSERT_EQUAL_INT64(4277556, day06_part1()); }
 void test_day06_part2(void) { TEST_ASSERT_EQUAL_INT64(3263827, day06_part2()); }
 
 void test_day07_part1(void) { TEST_ASSERT_EQUAL_INT32(21, day07_part1()); }
-void test_day07_part2(void) { TEST_ASSERT_EQUAL_INT32(0, day07_part2()); }
+void test_day07_part2(void) { TEST_ASSERT_EQUAL_INT32(40, day07_part2()); }
 
 void setUp(void) { /* Nothing to do – placeholder for Unity */ }
 

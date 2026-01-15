@@ -84,13 +84,70 @@ uint32_t day07_part1(void)
     return total_splits;
 }
 
+typedef struct {
+    char entry;
+    int visited;
+    uint64_t possible_paths;
+} entry_t;
+
+typedef struct {
+    entry_t* manifold_entries;
+    size_t line_lenght;
+    size_t total_lines;
+} manifold_t;
+
+#define IDX(row, col, width) ((row) * width + (col))
+
+uint64_t calculate_timelines(size_t line_index, size_t entry_index, const manifold_t* manifold)
+{
+
+    if (line_index >= manifold->total_lines)
+    {
+        return 1;
+    }
+
+    if (entry_index >= manifold->line_lenght) /* line_lenght == width */
+        return 0;                            /* dead‑end */
+
+
+    uint16_t index = IDX(line_index, entry_index, manifold->line_lenght);
+    const entry_t* cell = &manifold->manifold_entries[index];
+
+    if (cell->visited) {
+        return cell->possible_paths;
+    }
+
+    uint64_t result = 0;
+
+    switch (cell->entry)
+    {
+        case '.': /* straight down */
+            result = calculate_timelines(line_index + 1, entry_index, manifold);
+            break;
+
+        case '^': /* splitter – go left‑down and right‑down */
+            result = calculate_timelines(line_index + 1, entry_index - 1, manifold) +
+                     calculate_timelines(line_index + 1, entry_index + 1, manifold);
+            break;
+
+        default: /* any other character – no valid path */
+            result = 0;
+            break;
+    }
+
+    ((entry_t*) cell)->possible_paths = result;
+    ((entry_t*) cell)->visited = 1;
+
+    return result;
+}
+
 /**
  * @brief Solves Day 07 Part 2 of Advent of Code 2025.
  * This function reads the input data and processes it to produce
  * the result for Part 2 of Day 07.
  * @return uint32_t The result of Part 2, or EXIT_FAILURE on error.
  */
-uint32_t day07_part2(void)
+uint64_t day07_part2(void)
 {
 
     clog_info(__FILE__, "Entering day07_part2 function");
@@ -102,6 +159,26 @@ uint32_t day07_part2(void)
         return -EXIT_FAILURE;
     }
 
+    size_t beam_start_index = strchr(lines[0], 'S') - lines[0];
+    if (0 == beam_start_index)
+    {
+        clog_error(__FILE_NAME__, "Cannot locate the start of the tachyon beam");
+        return -EXIT_FAILURE;
+    }
+
+    size_t line_length = strlen(lines[0]);
+    entry_t* manifold_entries = malloc(line_count * line_length * sizeof(*manifold_entries));
+
+    for(size_t line_index=0; line_index<line_count; line_index++) {
+        for(size_t entry_index=0; entry_index<line_length; entry_index++) {
+            manifold_entries[IDX(line_index, entry_index, line_length)].entry = lines[line_index][entry_index];
+            manifold_entries[IDX(line_index, entry_index, line_length)].visited = 0;
+        }
+    }
+
+    manifold_t manifold = {manifold_entries, strlen(lines[0]), line_count};
+    uint64_t total_timelines = calculate_timelines(1, beam_start_index, &manifold);
+
     free(lines);
-    return 0;
+    return total_timelines;
 }
